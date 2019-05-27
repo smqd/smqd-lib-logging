@@ -1,5 +1,6 @@
 package com.thing2x.smqd.logging
 import com.thing2x.smqd.logging.MacroTest.Demo
+import com.typesafe.scalalogging.StrictLogging
 import org.scalatest.FlatSpec
 
 object Position extends SourcePositionAware {
@@ -13,7 +14,7 @@ object MacroTest {
 
   class Demo extends AbstractDemo {
     def doDemo(): Unit = {
-      logger.info(s"| $FILE $LINE | Demo logging")
+      logger.info(s"($FILE $LINE) Demo logging")
     }
   }
 }
@@ -23,9 +24,9 @@ class MacroTest extends FlatSpec with SourcePositionLogging {
   "Macro" should "work" in {
 
     val str = Position.str
-    assert(str == "MacroTest.scala 6")
+    assert(str.matches("MacroTest.scala\\s[0-9]+$"))
 
-    println(s"==> $str")
+    logger.info(s"Position.str ==> $str")
 
     var n = 0
     logger.trace(s"some trace message ${n = n + 1; n}")
@@ -40,5 +41,20 @@ class MacroTest extends FlatSpec with SourcePositionLogging {
     val demo = new Demo
     demo.doDemo()
     logger.info("finish demo")
+  }
+
+  it should "work with duplicated logger" in {
+    val demo = new DemoClass
+    demo.invokeMe()
+  }
+}
+
+abstract class DemoImpl extends StrictLogging {
+  def invokeMe(): Unit
+}
+
+class DemoClass extends DemoImpl with SourcePositionAware {
+  def invokeMe(): Unit = {
+    logger.info(s"| $FILE $LINE | How to solve confliction with scala-logging issue")
   }
 }

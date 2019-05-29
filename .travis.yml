@@ -3,23 +3,29 @@ dist: trusty
 language: scala
 jdk: oraclejdk8
 scala:
-  - 2.12.8
+- 2.12.8
 cache:
   directories:
-    - "$HOME/.ivy2/cache"
-    - "$HOME/.sbt"
+  - "$HOME/.ivy2/cache"
+  - "$HOME/.sbt"
 before_cache:
-  - find $HOME/.ivy2/cache -name "ivydata-*.properties" -print -delete
-  - find $HOME/.sbt -name "*.lock" -print -delete
-  - rm -f $HOME/.ivy2/.sbt.ivy.lock
+- find $HOME/.ivy2/cache -name "ivydata-*.properties" -print -delete
+- find $HOME/.sbt -name "*.lock" -print -delete
+- rm -f $HOME/.ivy2/.sbt.ivy.lock
 before_install:
-  - |
-    if [[ $TRAVIS_PULL_REQUEST == false ]]; then
-      openssl aes-256-cbc -K $encrypted_8c6acfc3758c_key -iv $encrypted_8c6acfc3758c_iv -in travis/secrets.tar.enc -out travis/local.secrets.tar -d;
-      tar xv -C travis -f travis/local.secrets.tar;
-    fi
+- |
+  if [[ $TRAVIS_PULL_REQUEST == false ]]; then
+    openssl aes-256-cbc -K $encrypted_8c6acfc3758c_key -iv $encrypted_8c6acfc3758c_iv -in travis/secrets.tar.enc -out travis/local.secrets.tar -d;
+    tar xv -C travis -f travis/local.secrets.tar;
+  fi
 after_success:
-  - |-
-    if [[ $TRAVIS_PULL_REQUEST == false ]]; then
-      sbt ++$TRAVIS_SCALA_VERSION publishSigned;
-    fi
+- |-
+  if [[ $TRAVIS_PULL_REQUEST == false ]]; then
+    sbt ++$TRAVIS_SCALA_VERSION publishSigned;
+  fi
+env:
+  global:
+  - secure: F3SQMl/SO4TtdaO+/lN0i4NLrGMbWltcMLhWCAnjSNgGG7Xgyw1k2uUk9VvCSbgCyQuYQS4RJSqtQkLd6/Sftla6zRnfOm1P1JxBBWbxOagx6XdEWYBvQZ22JDNyzPKc1uoq4UWA5BcLt3/NM0JFFan2LKi5qd2ronXhLCdhqcusBAt9xQjzi49Sy2kH5F7wU3AW+6srutkUjgErVnVcd9iEgaGtjchk7MNdxXLWHFq5tNsqb1dXSzh3HuVE2/80eDT4s3FFfDkU4n+SQUS3bMyAwZWJHMucjZHGwkSi8dIOPwVgGJxn8w0A3eOMRNAtDiD7vZL1FOgKdrzhKE/ruTTSTHYEVEU1uCRT5lbEEGucQs2d5BCV/H8vDBsC8tTSNzqnDK5zQ3Hir0QPk8XyFnaYgeKg8+ofDsIxYZ/vmLI41O8CSb4lqUxXh+j7CvzFDRo8HPWo1B8wANlDyBbHWBj1B41MnQBA9tKWH3Tz48bnktYS1MfT2k+sbhyiiNo22JSOV/kOSVxxAJKLh0376QPc9VDVB8HbJVHPd3WM+eWNN8iiZngyRBk7cjgaxHFqklTpL/H/5gLjg2HQFEBH6iTm8tFxfD10Z8nP5uKpTBLqyp+2TTNuZ1B8MVWBBf2WVovaJHukrZZzsosuVKyEXPvzHfUSTiQ+Pdoiqo+H9CE=
+  - secure: g8Xrre2WV1dCE6UmsAYee6zlVWaj5gewowiUu9Sf1j9UAiOfKPMvmT3Oc4/W9sUCMWJn32pZKZIpgTWss4Q/uUknmM3FpUbxrnRdxYbRVKHbMG4PEZUXWoPGTj6Kr7HElONdByoOlRshPled7+MsAT0k1OVmpjfpI/yP8xV+NWwoWghXOTPWolxIXONlrv1jZAoDpKXnqLZVbj9P6NOk+qSepHM1et7GKsKIm3RkMiIDAZyLSXyTbL2E619tzAQrX4rO03+Z49z8iFm3JhoUahitNO1Z2r2a++78qkdyetm+zATChMGO7R7bywA45WX3Crd5qj2txIgEoPHdYPTrvE/1CcBWkxll3ojeTi2plR1jAvXQyPZwpWJgZWyB0X+WL1Z9+i/PeFIndaDfauOutURvh1/C7/LUFGK7MJ/RLeewMODYdS1mppi56LqI/UQwQPgItXp43wxEW/dcrGML/PV0Qt34aZF5iFAI4ay2GmTV6e+jZuG9yATSbaNnJTAlrBob/70D01+g0aM/R8mibhiusalyHO5tvwhBOqxMnYQ695HmcKjZyc0JCIGxopqIXpJm78YtpbymCbxOBo1E9wMJoQiRoxB+Ej17cF7uALKE/yDRY5iSBa5fhonkgkQKztPuDOh6TVgwlMUL66xD9priMV1b84YFOFHYNrvdIQw=
+  - secure: hvs8Howko1h8/rq90fTVl1HJK4qeIkluQ2mxKKgyxean6PFGCkjhpTwGpPo8KGAS5FUzeZ2/+Y0CaVppyw9UAWbtcdmiy9gsg4vi9JUSinMlA1cV+GrDMZx21623a56zGnmxXOqcsFtBreRghye2GGnZGe5lCObtD60WaP6VYeOuAsfE2GfwJvBAHZbPht3c4KP4t7bHsRCZ5NM+yNdK/B2v3AQzZcH546w+3wAQCDAej/5wKGkxzybenSSsfLErhZScikFcbpc6awqaIB/23GWJsDZfkupx+saHAIbAMkhwH1qlZajaHBOV3BOUgw2vHnm06S8La4tBW+ajTw3d9di40c/cZR0TyqMLXSj3jm5QuPmKvHacPWHuTLnrc68QbT+YvLzhUZlf4CfX1lurK++hyToHt7dyMCd/qoH4fpj0qzJcWH9LIXYnw1Ld1nTSIduaeTXKEj1g0ZzJtNKKeRNpFhruohMUQcN6pffzwPrX27ulIsbmholrgvtrGnjkciQs9j3WXy8eg19qwp32pmwJfzDrCS4yKrHi1sQVvDG9cwHEsJZPEYcTUOEl3ZVS0HNRHKgjQ5TP3DlyRR2JUhOiD1bMeX/9LlTvHBqu/4JnsQNZ9ekjz2I95ZuEplMlzI5b0rvRyAkkhkvmECKCygEGr4yPxdSm7Kv2UQFnqWA=
+  - secure: mmgHHBe8OEvDvV3bhIyCw+7QJyr148koqEJTanHV79osA1wep7uq0RUluPjdAUkRxQCBD91DUvCIqVeUAVMdY1xblrTQcFSSmidoJ0D5c2rbJluGWywaM3/WueUS2Bs9vfe48Gp8qKyHOwf76VanlkDPQqJVE8ntruBlYWHXC8Lnm7mZjgdyPJBbSwhhZiS9+vj9TjRj1cciqBv73jcOpkkdM3d4IXrSrO53BnYGRTyR/3cnAIDf0x3V/39jELsJ+8AIefFK0SCYxCYABB1ab40hx7FeVOPb6arvoJFfnznwhVJhU/2v2cKs0H2LWuCoWY3Tj97DYic8xA5E1NSF9TI9H4QJsXizuIPlRrdnP9hVc768xgd9/FCuDfhBPkMEUlfkE8p48F2dsjP8fZdFZuvLYO6Pg6PALYYYTWLm5HXBQ8hnmcRIyakp8573FrgMmZ4juxnckGMoGhHcH7S3O3IhBGJxfrcuXwtqDr3hOgDWmuU2Bx0J979/1+E0FI2HaOLp4T9+enP8+j6p6Fdnk9cK7YkFHYrAxwVtlV7GxdWlWz31mI5TulO8zTUfin1SZ1lHnA/A3tMcXj76ZYqy+J/HEzahValdvgDKjFwyedAo7qMiko9JQeZFBCH4sT6FQ/NpFbxtOSyKPU56ZnDzKu4KPew4l031FSaM4SuUNzI=

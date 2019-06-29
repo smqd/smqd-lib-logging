@@ -1,5 +1,5 @@
 
-val versionString = "0.1.0-SNAPSHOT"
+val versionString = "0.1.0"
 val scalaVersionString = "2.12.8"
 
 lazy val root = (project in file("."))

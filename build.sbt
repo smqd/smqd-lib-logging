@@ -1,6 +1,6 @@
 
-val versionString = "0.1.0"
-val scalaVersionString = "2.12.8"
+val versionString = "0.1.1-SNAPSHOT"
+val scalaVersionString = "2.12.16"
 
 lazy val root = (project in file("."))
   .settings(
@@ -12,7 +12,7 @@ lazy val root = (project in file("."))
   )
   .settings(
     libraryDependencies ++= Seq(
-      "org.scala-lang" % "scala-reflect" % "2.12.8" % Provided,
+      "org.scala-lang" % "scala-reflect" % scalaVersionString % Provided,
       "org.slf4j" % "slf4j-api" % "1.7.26" % Provided,
       "com.typesafe.scala-logging" %% "scala-logging" % "3.9.2" % Test,
       "org.scalatest" %% "scalatest" % "3.0.5" % Test,
@@ -35,15 +35,15 @@ lazy val root = (project in file("."))
     developers := List(
       Developer("OutOfBedlam", "Kwon, Yeong Eon", sys.env.getOrElse("SONATYPE_DEVELOPER_0", ""), url("http://www.uangel.com"))
     ),
-    publishArtifact in Test := false, // Not publishing the test artifacts (default)
-    publishMavenStyle := true
+    Test / publishArtifact := false, // Not publishing the test artifacts (default)
+    publishMavenStyle := true,
+    ThisBuild / versionScheme := Some("early-semver"),
   )
   .settings(
     // PGP signing
     pgpPublicRing := file("./travis/local.pubring.asc"),
     pgpSecretRing := file("./travis/local.secring.asc"),
     pgpPassphrase := sys.env.get("PGP_PASS").map(_.toArray),
-    useGpg := false
   )
   .settings(
     // License

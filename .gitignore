@@ -4,3 +4,4 @@ travis/local.*
 .history
 .metadata
 .project
+.bsp/

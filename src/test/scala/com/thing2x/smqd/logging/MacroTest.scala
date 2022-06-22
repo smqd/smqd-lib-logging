@@ -1,7 +1,7 @@
 package com.thing2x.smqd.logging
 import com.thing2x.smqd.logging.MacroTest.Demo
 import com.typesafe.scalalogging.StrictLogging
-import org.scalatest.FlatSpec
+import org.scalatest.flatspec.AnyFlatSpec
 
 object Position extends SourcePositionAware {
   val str: String = s"$FILE $LINE"
@@ -19,7 +19,7 @@ object MacroTest {
   }
 }
 
-class MacroTest extends FlatSpec with SourcePositionLogging {
+class MacroTest extends AnyFlatSpec with SourcePositionLogging {
 
   "Macro" should "work" in {
 

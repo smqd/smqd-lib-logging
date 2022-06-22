@@ -16,11 +16,9 @@ jobs:
       uses: actions/checkout@v2
       with:
         lfs: false
-    - name: Build
+    - name: Build and Publish
       env:
         SONATYPE_USER: ${{ secrets.SONATYPE_USER }}
         SONATYPE_PASS: ${{ secrets.SONATYPE_PASS }}
-      run: sbt compile
-    - name: Publish
-      run: sbt publish
+      run: sbt compile publish
       

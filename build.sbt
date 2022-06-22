@@ -18,11 +18,14 @@ lazy val root = (project in file("."))
   )
   .settings(
     libraryDependencies ++= Seq(
-      "org.scala-lang" % "scala-reflect" % scalaVersionString % Provided,
-      "org.slf4j" % "slf4j-api" % "1.7.36" % Provided,
+      /// macro
+      "org.scala-lang" % "scala-reflect" % scalaVersion.value,
+      /// logging
+      "org.slf4j" % "slf4j-api" % "1.7.36",
+      "ch.qos.logback" % "logback-classic" % "1.2.11",
+      /// test
       "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5" % Test,
       "org.scalatest" %% "scalatest" % "3.2.12" % Test,
-      "ch.qos.logback" % "logback-classic" % "1.2.11" % Provided,
     )
   )
   .settings(

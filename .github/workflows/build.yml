@@ -1,0 +1,23 @@
+name: CI build
+
+on:
+  push:
+    tags:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Scala build system
+      uses: olafurpg/setup-scala@v11
+      with:
+        java-version: 1.8
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        lfs: false
+    - name: Build
+      run: sbt compile
+    - name: Publish
+      run: sbt publish
+      

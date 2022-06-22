@@ -22,8 +22,8 @@ lazy val root = (project in file("."))
     developers := List(
       Developer("OutOfBedlam", "Kwon, Yeong Eon", sys.env.getOrElse("SONATYPE_DEVELOPER_0", ""), url("http://www.uangel.com"))
     ),
+    ThisBuild / dynverSonatypeSnapshots := true,
     Test / publishArtifact := false, // Not publishing the test artifacts (default)
-    ThisBuild / versionScheme := Some("early-semver"),
   )
   .settings(
     // License

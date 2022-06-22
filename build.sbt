@@ -1,6 +1,10 @@
 
-val scalaVersionString = "2.12.16"
 val versionString = "0.1.2-SNAPSHOT"
+
+val scala_2_12 = "2.12.16"
+val scala_2_13 = "2.13.8"
+
+val scalaVersionString = scala_2_12
 
 lazy val root = (project in file("."))
   .settings(
@@ -8,7 +12,8 @@ lazy val root = (project in file("."))
     organization := "com.thing2x",
     project / version := versionString,
     scalaVersion := scalaVersionString,
-    scalacOptions ++= Seq("-feature", "-deprecation", "-unchecked")
+    scalacOptions ++= Seq("-feature", "-deprecation", "-unchecked"),
+    crossScalaVersions := Seq(scala_2_12, scala_2_13)
   )
   .settings(
     libraryDependencies ++= Seq(

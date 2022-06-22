@@ -21,5 +21,5 @@ jobs:
         SONATYPE_PASSWORD: '${{ secrets.SONATYPE_PASSWORD }}'
         PGP_PASSPHRASE: '${{ secrets.PGP_PASSPHRASE }}'
         PGP_SECRET: '${{ secrets.PGP_SECRET }}'
-      run: sbt ci-release
+      run: sbt +ci-release
       

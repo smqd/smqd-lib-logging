@@ -1,7 +1,7 @@
 
 [![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/https/oss.sonatype.org/com.thing2x/smqd-lib-logging_2.12.svg)](https://oss.sonatype.org/content/groups/public/com/thing2x/smqd-lib-logging_2.12/)
 [![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/https/oss.sonatype.org/com.thing2x/smqd-lib-logging_2.12.svg)](https://oss.sonatype.org/content/groups/public/com/thing2x/smqd-lib-logging_2.12/)
-[![Actions Status](https://github.com/smqd/smqd-lib-logging/workflows/CI%20build/badge.svg)](https://github.com/smqd/smqd-lib-logging/actions)
+[![Actions Status](https://github.com/smqd/smqd-lib-logging/workflows/build/badge.svg)](https://github.com/smqd/smqd-lib-logging/actions)
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 ## Source code file name and line number aware logging

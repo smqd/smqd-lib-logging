@@ -11,6 +11,7 @@ lazy val root = (project in file("."))
     name := "smqd-lib-logging",
     organization := "com.thing2x",
     project / version := versionString,
+    ThisBuild / versionScheme := Some("early-semver"),
     scalaVersion := scalaVersionString,
     scalacOptions ++= Seq("-feature", "-deprecation", "-unchecked"),
     crossScalaVersions := Seq(scala_2_12, scala_2_13)

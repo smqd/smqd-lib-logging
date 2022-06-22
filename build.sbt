@@ -1,10 +1,12 @@
 
 val scalaVersionString = "2.12.16"
+val versionString = "0.1.2-SNAPSHOT"
 
 lazy val root = (project in file("."))
   .settings(
     name := "smqd-lib-logging",
     organization := "com.thing2x",
+    project / version := versionString,
     scalaVersion := scalaVersionString,
     scalacOptions ++= Seq("-feature", "-deprecation", "-unchecked")
   )

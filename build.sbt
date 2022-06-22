@@ -3,7 +3,7 @@ name := "smqd-lib-logging"
 
 organization := "com.thing2x"
 
-version := "1.0.0-SNAPSHOT"
+version := "1.0.0"
 
 //////////////////////////////////////////////////////
 // scala

@@ -20,12 +20,16 @@ import org.slf4j.{LoggerFactory, Logger => Underlying}
 import scala.language.experimental.macros
 
 object SourcePositionLogger {
-  def apply(underlying: Underlying): SourcePositionLogger = new SourcePositionLogger(underlying)
-  def apply(name: String): SourcePositionLogger = new SourcePositionLogger(LoggerFactory.getLogger(name))
-  def apply(clazz: Class[_]): SourcePositionLogger = new SourcePositionLogger(LoggerFactory.getLogger(clazz))
+  def apply(underlying: Underlying, includeSourcePosition: Boolean): SourcePositionLogger =
+    new SourcePositionLogger(underlying, includeSourcePosition)
+  def apply(name: String, includeSourcePosition: Boolean): SourcePositionLogger =
+    new SourcePositionLogger(LoggerFactory.getLogger(name), includeSourcePosition)
+  def apply(clazz: Class[_], includeSourcePosition: Boolean): SourcePositionLogger =
+    new SourcePositionLogger(LoggerFactory.getLogger(clazz), includeSourcePosition)
 }
 
-final class SourcePositionLogger private(val underlying: Underlying ) extends Serializable {
+final class SourcePositionLogger private(val underlying: Underlying, val includeSourcePosition: Boolean )
+  extends Serializable {
   // Error
   def error(message: String): Unit = macro errorMessage
   def error(message: String, cause: Throwable): Unit = macro errorMessageCause

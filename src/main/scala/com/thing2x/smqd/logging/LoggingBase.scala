@@ -17,6 +17,21 @@ package com.thing2x.smqd.logging
 import org.slf4j.LoggerFactory
 
 trait SourcePositionLogging extends SourcePositionAware {
+  /**
+   * Override this if logger should write message with source code position(file name + line number)
+   */
+  protected val logSourcePosition: Boolean = false
+
   protected val logger: SourcePositionLogger =
-    SourcePositionLogger(LoggerFactory.getLogger(getClass.getName))
+    SourcePositionLogger(LoggerFactory.getLogger(getClass.getName), logSourcePosition)
+}
+
+trait LoggingBase extends SourcePositionAware {
+  /**
+   * Override this if logger should write message with source code position(file name + line number)
+   */
+  protected val logSourcePosition: Boolean = false
+
+  protected val logger: SourcePositionLogger =
+    SourcePositionLogger(LoggerFactory.getLogger(getClass.getName), logSourcePosition)
 }

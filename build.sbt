@@ -16,7 +16,7 @@ lazy val root = (project in file("."))
       "org.slf4j" % "slf4j-api" % "1.7.36" % Provided,
       "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5" % Test,
       "org.scalatest" %% "scalatest" % "3.2.12" % Test,
-      "ch.qos.logback" % "logback-classic" % "1.2.11" % Test,
+      "ch.qos.logback" % "logback-classic" % "1.2.11" % Provided,
     )
   )
   .settings(

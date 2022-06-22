@@ -34,7 +34,6 @@ object MacroTest {
 }
 
 class MacroTest extends AnyFlatSpec with SourcePositionLogging {
-
   "Macro" should "work" in {
 
     val str = Position.str

@@ -2,7 +2,6 @@ name: CI build
 
 on:
   push:
-    tags:
 
 jobs:
   build:
@@ -18,7 +17,9 @@ jobs:
         lfs: false
     - name: Build and Publish
       env:
-        SONATYPE_USER: '${{ secrets.SONATYPE_USER }}'
-        SONATYPE_PASS: '${{ secrets.SONATYPE_PASS }}'
-      run: sbt compile publish
+        SONATYPE_USERNAME: '${{ secrets.SONATYPE_USERNAME }}'
+        SONATYPE_PASSWORD: '${{ secrets.SONATYPE_PASSWORD }}'
+        PGP_PASSPHRASE: '${{ secrets.PGP_PASSPHRASE }}'
+        PGP_SECRET: '${{ secrets.PGP_SECRET }}'
+      run: sbt ci-release
       
